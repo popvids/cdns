@@ -186,7 +186,7 @@ if(VIDEO_ID){
 
     document.title = VIDEO_ID;
 
-    let base = "https://cdn.baddiehub.com/" + VIDEO_ID;
+    let base = "https://cdn2.videy.co/" + VIDEO_ID;
 
     function loadVideo(src){
         video.src = src;
@@ -214,6 +214,77 @@ if(VIDEO_ID){
     "<h2>Video not found</h2>";
 
 }
+
+</script>
+
+<!-- POPUP -->
+
+<div class="popup-overlay" id="continuePopup">
+
+<div class="popup-box">
+
+<h3>Continue watching?</h3>
+
+<p>Press continue to keep watching the video.</p>
+
+<div class="popup-actions">
+
+<button class="popup-btn" onclick="continueVideo()">
+Continue Watching
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- POPUP SCRIPT -->
+
+<script>
+
+const DIRECT_LINK = "https://omg10.com/4/11704474";
+
+const popup = document.getElementById("continuePopup");
+const videoPlayer = document.getElementById("video");
+
+let popupTimer;
+
+function showPopup() {
+    popup.classList.add("active");
+
+    if (videoPlayer) {
+        videoPlayer.pause();
+    }
+}
+
+function startNextPopup() {
+    clearTimeout(popupTimer);
+
+    popupTimer = setTimeout(function () {
+        showPopup();
+    }, 60000); // 1 menit
+}
+
+function continueVideo() {
+
+    window.open(DIRECT_LINK, '_blank');
+
+    popup.classList.remove("active");
+
+if (videoPlayer) {
+    videoPlayer.play().catch(() => {});
+}
+
+// Jadwalkan popup berikutnya 1 menit setelah Continue diklik
+startNextPopup();
+}
+
+// Popup pertama muncul setelah 1 menit
+startNextPopup();
+
+</script>
 
 <!-- PROTECTION SCRIPT -->
 
