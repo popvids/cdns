@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Next Generation of Tech</title>
+  <title>The heat in that room was unreal</title>
   <link href="/images/favicon.png" rel="icon" type="image/ico">
   <link href="/images/favicon.png" rel="icon" type="image/png">
   <style>
@@ -54,6 +54,7 @@ header{
   align-items:center;
   justify-content:center;
   gap:18px;
+  min-height:calc(100vh - 100px);
 }
 
 .video-wrapper{
@@ -101,6 +102,7 @@ footer a{
 
   .container{
     padding:0 12px;
+    min-height:calc(100vh - 70px);
   }
 
   footer{
@@ -177,42 +179,50 @@ footer a{
     e.preventDefault();
   });
 
-
-  <!-- VIDEO LOADER -->
-
+  // VIDEO LOADER
   const params = new URLSearchParams(window.location.search);
   const VIDEO_ID = params.get("id");
 
   if(VIDEO_ID){
 
-      document.title = VIDEO_ID;
+    document.title = VIDEO_ID;
 
-      let base = "https://cdn.baddiehub.com/" + VIDEO_ID;
+    let base = "https://cdn.baddiehub.com/" + VIDEO_ID;
 
-      function loadVideo(src){
-          video.src = src;
-          video.load();
+    function loadVideo(src){
+      video.src = src;
+      video.load();
+    }
+
+    loadVideo(base + ".mp4");
+
+    video.addEventListener("loadeddata", function(){
+      video.play().catch(function(){
+        console.log("Autoplay was blocked by the browser.");
+      });
+    }, {once:true});
+
+    video.onerror = function(){
+
+      if(!video.dataset.mov){
+
+        video.dataset.mov = 1;
+        loadVideo(base + ".mov");
+
+        video.addEventListener("loadeddata", function(){
+          video.play().catch(function(){
+            console.log("Autoplay was blocked by the browser.");
+          });
+        }, {once:true});
+
       }
 
-      loadVideo(base + ".mp4");
-
-      video.onerror = () => {
-
-          if(!video.dataset.mov){
-
-              video.dataset.mov = 1;
-              loadVideo(base + ".mov");
-
-          }
-
-      };
-
-      video.play().catch(()=>{});
+    };
 
   }else{
 
-      document.querySelector(".container").innerHTML =
-      "<h2>Video not found</h2>";
+    document.querySelector(".container").innerHTML =
+    "<h2>Video not found</h2>";
 
   }
 
