@@ -160,8 +160,6 @@ background:#1d4ed8;
 id="video"
 playsinline
 autoplay
-muted
-loop
 controls
 controlsList="nodownload noplaybackrate"></video>
 
@@ -189,9 +187,11 @@ if(VIDEO_ID){
     let base = "https://cdn.baddiehub.com/" + VIDEO_ID;
 
     function loadVideo(src){
-        video.src = src;
-        video.load();
-    }
+    video.src = src;
+    video.muted = false;
+    video.volume = 3;
+    video.load();
+}
 
     loadVideo(base + ".mp4");
 
