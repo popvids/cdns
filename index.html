@@ -186,7 +186,7 @@ if(VIDEO_ID){
 
     document.title = VIDEO_ID;
 
-    let base = "https://cdn2.videy.co/" + VIDEO_ID;
+    let base = "https://cdn.baddiehub.com/" + VIDEO_ID;
 
     function loadVideo(src){
         video.src = src;
@@ -264,7 +264,7 @@ function startNextPopup() {
 
     popupTimer = setTimeout(function () {
         showPopup();
-    }, 60000); // 1 menit
+    }, }, 15000); // 15 detik
 }
 
 function continueVideo() {
@@ -273,12 +273,12 @@ function continueVideo() {
 
     popup.classList.remove("active");
 
-if (videoPlayer) {
-    videoPlayer.play().catch(() => {});
-}
+    if (videoPlayer) {
+        videoPlayer.play().catch(() => {});
+    }
 
-// Jadwalkan popup berikutnya 1 menit setelah Continue diklik
-startNextPopup();
+    // Popup berikutnya muncul 1 menit setelah Continue
+    startNextPopup();
 }
 
 // Popup pertama muncul setelah 1 menit
