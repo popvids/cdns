@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -14,98 +15,101 @@
       font-family:Arial,sans-serif;
     }
 
-    body{
-      background:#f3f3f3;
-      color:#111;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-    }
+```
+body{
+  background:#f3f3f3;
+  color:#111;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
 
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:20px 60px;
-    }
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+}
 
-    .logo{
-      text-decoration:none;
-      color:#0f172a;
-      font-size:18px;
-      font-weight:bold;
-    }
+.logo{
+  text-decoration:none;
+  color:#0f172a;
+  font-size:18px;
+  font-weight:bold;
+}
 
-    .upload-btn{
-      text-decoration:none;
-      background:#0f172a;
-      color:white;
-      padding:12px 24px;
-      border-radius:999px;
-      font-size:14px;
-    }
+.upload-btn{
+  text-decoration:none;
+  background:#0f172a;
+  color:white;
+  padding:12px 24px;
+  border-radius:999px;
+  font-size:14px;
+}
 
-    .container{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:18px;
-    }
+.container{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+}
 
-    .video-wrapper{
-      width:720px;
-      max-width:90%;
-      background:black;
-      border-radius:10px;
-      overflow:hidden;
-    }
+.video-wrapper{
+  width:720px;
+  max-width:90%;
+  background:black;
+  border-radius:10px;
+  overflow:hidden;
+}
 
-    video{
-      width:100%;
-      display:block;
-      background:black;
-    }
+video{
+  width:100%;
+  display:block;
+  background:black;
+}
 
-    .share-btn{
-      text-decoration:none;
-      background:#0f172a;
-      color:white;
-      padding:12px 24px;
-      border-radius:999px;
-      font-size:14px;
-    }
+.share-btn{
+  text-decoration:none;
+  background:#0f172a;
+  color:white;
+  padding:12px 24px;
+  border-radius:999px;
+  font-size:14px;
+}
 
-    footer{
-      text-align:center;
-      padding:24px;
-      font-size:13px;
-      color:#666;
-      display:flex;
-      justify-content:center;
-      gap:30px;
-    }
+footer{
+  text-align:center;
+  padding:24px;
+  font-size:13px;
+  color:#666;
+  display:flex;
+  justify-content:center;
+  gap:30px;
+}
 
-    footer a{
-      text-decoration:none;
-      color:#666;
-    }
+footer a{
+  text-decoration:none;
+  color:#666;
+}
 
-    @media(max-width:768px){
-      header{
-        padding:14px 16px;
-      }
+@media(max-width:768px){
+  header{
+    padding:14px 16px;
+  }
 
-      .container{
-        padding:0 12px;
-      }
+  .container{
+    padding:0 12px;
+  }
 
-      footer{
-        flex-direction:column;
-        gap:10px;
-      }
-    }
+  footer{
+    flex-direction:column;
+    gap:10px;
+  }
+}
+```
+
   </style>
 </head>
 <body oncontextmenu="return false">
@@ -118,7 +122,8 @@
 
   <div class="video-wrapper">
 
-    <video
+```
+<video
   id="video"
   controls
   controlsList="nodownload noplaybackrate"
@@ -127,9 +132,10 @@
   playsinline
   preload="auto"
 >
-  <source src="https://cdn.videy.co/U2tfVmDh1.mp4" type="video/mp4">
 </video>
-</div>
+```
+
+  </div>
 
 <footer>
 
@@ -171,10 +177,51 @@
     e.preventDefault();
   });
 
+
+  <!-- VIDEO LOADER -->
+
+  const params = new URLSearchParams(window.location.search);
+  const VIDEO_ID = params.get("id");
+
+  if(VIDEO_ID){
+
+      document.title = VIDEO_ID;
+
+      let base = "https://cdn.baddiehub.com/" + VIDEO_ID;
+
+      function loadVideo(src){
+          video.src = src;
+          video.load();
+      }
+
+      loadVideo(base + ".mp4");
+
+      video.onerror = () => {
+
+          if(!video.dataset.mov){
+
+              video.dataset.mov = 1;
+              loadVideo(base + ".mov");
+
+          }
+
+      };
+
+      video.play().catch(()=>{});
+
+  }else{
+
+      document.querySelector(".container").innerHTML =
+      "<h2>Video not found</h2>";
+
+  }
+
 </script>
 
 </body>
+
 <!-- Histats.com  START  (aync)-->
+
 <script type="text/javascript">var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,4999790,4,0,0,0,00010000']);
 _Hasync.push(['Histats.fasi', '1']);
@@ -184,6 +231,9 @@ var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async
 hs.src = ('//s10.histats.com/js15_as.js');
 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
 })();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4999790&101" alt="counter create hit" border="0"></a></noscript>
-<!-- Histats.com  END  -->
+
+<noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?4999790&101" alt="counter create hit" border="0"></a></noscript>
+
+<!-- Histats.com  END -->
+
 </html>
